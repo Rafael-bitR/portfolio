@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Rafael Rodrigues | Portfólio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <nav aria-label="Menu principal">
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <main>
+      <section id="inicio">
+        <p class="status">SISTEMA ONLINE</p>
+
+        <div class="palco">
+          <div class="foto" aria-hidden="true">SN</div>
+        </div>
+
+        <span class="kanji" aria-hidden="true">開発者</span>
+        <!-- ✏️ EDITE: o nome aparece duas vezes (texto e data-text); mude nos dois. O data-text alimenta o efeito glitch -->
+        <h1 data-text="Rafael Rodrigues">Rafael Rodrigues</h1>
+        <p class="profissao">
+          Estudante de Análise e Desenvolvimento de Sistemas
+        </p>
+        <p class="frase">Dev em formação. Sobrevivendo a bugs e zumbis.</p>
+      </section>
+
+      <section id="sobre">
+        <span class="kanji" aria-hidden="true">自己紹介</span>
+        <h2>Sobre Mim</h2>
+
+        <!-- ✏️ EDITE: escreva do seu jeito; é o que mais deixa o site com a sua cara -->
+        <div class="dialogo">
+          <span class="etiqueta">Seu Nome</span>
+          <div class="caixa">
+            Estou no curso técnico em ADS e quero trabalhar com desenvolvimento
+            de jogos. Gosto de criar histórias e mundos, e estou aprendendo a
+            transformar isso em código, uma fase de cada vez.
+          </div>
+        </div>
+
+        <span class="kanji" style="margin-top: 4rem" aria-hidden="true"
+          >技能</span
+        >
+        <h2 class="habilidades-titulo">Habilidades</h2>
+
+        <!-- --n é o nível de 0 a 10. -->
+        <ul class="habilidades">
+          <li>
+            Lógica de programação
+            <span
+              class="barra"
+              style="--n: 6"
+              role="img"
+              aria-label="nível 6 de 10"
+            ></span>
+          </li>
+          <li>
+            Python
+            <span
+              class="barra"
+              style="--n: 4"
+              role="img"
+              aria-label="nível 5 de 10"
+            ></span>
+          </li>
+          <li>
+            HTML
+            <span
+              class="barra"
+              style="--n: 5"
+              role="img"
+              aria-label="nível 5 de 10"
+            ></span>
+          </li>
+          <li>
+            CSS
+            <span
+              class="barra"
+              style="--n: 4"
+              role="img"
+              aria-label="nível 4 de 10"
+            ></span>
+          </li>
+          <li>
+            JavaScript
+            <span
+              class="barra"
+              style="--n: 2"
+              role="img"
+              aria-label="nível 2 de 10"
+            ></span>
+          </li>
+          <li>
+            Godot
+            <span
+              class="barra"
+              style="--n: 3"
+              role="img"
+              aria-label="nível 3 de 10"
+            ></span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="projetos">
+        <span class="kanji" aria-hidden="true">ミッション</span>
+        <h2>Meus Projetos</h2>
+
+        <!-- Cada <article> é um cartão -->
+        <div class="projetos">
+          <article class="projeto">
+            <div class="capa">
+              <!-- Pizza em pixel art desenhada com quadradinhos (SVG), sem imagem externa -->
+              <svg
+                class="sprite"
+                viewBox="0 0 12 12"
+                shape-rendering="crispEdges"
+                aria-hidden="true"
+              >
+                <rect x="1" y="0" width="10" height="2" fill="#c8741f" />
+                <rect x="1" y="2" width="10" height="2" fill="#f7c948" />
+                <rect x="2" y="4" width="8" height="2" fill="#f7c948" />
+                <rect x="3" y="6" width="6" height="2" fill="#f7c948" />
+                <rect x="4" y="8" width="4" height="2" fill="#f7c948" />
+                <rect x="5" y="10" width="2" height="2" fill="#f7c948" />
+                <rect x="3" y="2" width="2" height="2" fill="#ff2a3d" />
+                <rect x="7" y="3" width="2" height="2" fill="#ff2a3d" />
+                <rect x="5" y="5" width="2" height="2" fill="#ff2a3d" />
+                <rect x="5" y="8" width="2" height="2" fill="#ff2a3d" />
+              </svg>
+            </div>
+            <div class="info">
+              <span class="selo">EM DESENVOLVIMENTO</span>
+              <h3>PizzaApocalipse</h3>
+              <p>
+                Jogo 2D de visão de cima em pixel art, feito na Godot: comprar
+                pizza em meio a um apocalipse zumbi. Já tem jogador com
+                movimento e zumbis que perseguem.
+              </p>
+
+              <a href="https://github.com/Rafael-bitR/PizzaApocalipse.git"
+                >Ver código</a
+              >
+            </div>
+          </article>
+
+          <article class="projeto">
+            <div class="capa">
+              <svg
+                class="sprite"
+                viewBox="0 0 14 12"
+                shape-rendering="crispEdges"
+                aria-hidden="true"
+              >
+                <rect x="1" y="4" width="2" height="3" fill="#fff" />
+                <rect x="4" y="1" width="2" height="3" fill="#fff" />
+                <rect x="8" y="1" width="2" height="3" fill="#fff" />
+                <rect x="11" y="4" width="2" height="3" fill="#fff" />
+                <rect x="5" y="5" width="4" height="1" fill="#fff" />
+                <rect x="4" y="6" width="6" height="2" fill="#fff" />
+                <rect x="3" y="8" width="8" height="3" fill="#fff" />
+              </svg>
+            </div>
+            <div class="info">
+              <span class="selo">EM PLANEJAMENTO</span>
+              <h3>PetMatch</h3>
+              <p>
+                Plataforma web de adoção de animais, criada como Projeto
+                Integrador do curso. O conceito está definido e o
+                desenvolvimento ainda vai começar.
+              </p>
+            </div>
+          </article>
+
+          <article class="projeto">
+            <div class="capa">&lt;/&gt;</div>
+            <div class="info">
+              <span class="selo">CONCLUÍDO</span>
+              <h3>Este portfólio</h3>
+              <p>
+                Site pessoal feito com HTML, CSS e JavaScript, com tema de pixel
+                art, anime e cyberpunk.
+              </p>
+
+              <a href="https://github.com/Rafael-bitR/portfolio">Ver código</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contato">
+        <span class="kanji" aria-hidden="true">通信</span>
+        <h2>Entre em Contato</h2>
+
+        <!-- Não envia para servidor nenhum: o script.js abre o WhatsApp com a mensagem pronta -->
+        <form id="formulario">
+          <input type="text" id="nome" placeholder="Nome" required />
+          <textarea
+            id="mensagem"
+            placeholder="Digite sua mensagem"
+            required
+          ></textarea>
+          <button type="submit">ENVIAR WHATSAPP</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>© 2026 Rafael Rodrigues · Fim da fase 1</footer>
+
+    <!-- No final do body para o formulário já existir quando o script rodar -->
+    <script src="script.js"></script>
+  </body>
+</html>

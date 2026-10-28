@@ -1,0 +1,292 @@
+/* Cores */
+:root {
+  --fundo: #0a0a0d;
+  --cartao: #13131a;
+  --borda: #2e2e3a;
+  --texto: #ffffff;
+  --suave: #b9b9c6;
+  --vermelho: #ff2a3d;
+  --vermelho-escuro: #8f0f1b;
+  --ciano: #00e5ff;  /* detalhe de HUD */
+
+  --fonte-titulo: "Press Start 2P", "Courier New", monospace;
+  --fonte-texto: "VT323", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--fundo);
+  /* Camadas: luzes vermelhas + pontinhos de retícula (efeito de mangá) */
+  background-image:
+    radial-gradient(circle at 10% 15%, rgba(255, 42, 61, .20), transparent 40%),
+    radial-gradient(circle at 90% 85%, rgba(143, 15, 27, .25), transparent 40%),
+    radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1.6px);
+  background-size: auto, auto, 8px 8px;
+  background-attachment: fixed;
+  color: var(--texto);
+  font-family: var(--fonte-texto);
+  font-size: 1.45rem;  /* a VT323 é pequena, por isso o tamanho maior */
+  line-height: 1.35;
+  overflow-x: hidden;
+}
+
+/* Linhas de monitor antigo por cima de tudo; pointer-events deixa os cliques passarem */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .22) 0 1px, transparent 1px 3px);
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--ciano);
+  outline-offset: 3px;
+}
+
+h1, h2, h3 { font-family: var(--fonte-titulo); font-weight: 400; overflow-wrap: anywhere; }
+
+/* Menu */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem 1.8rem;
+  padding: 1rem;
+  background: rgba(10, 10, 13, .92);
+  border-bottom: 3px solid var(--vermelho);
+}
+nav a {
+  font-family: var(--fonte-titulo);
+  font-size: .62rem;
+  color: var(--texto);
+  text-decoration: none;
+}
+nav a::before { content: "> "; color: transparent; }  /* reserva o espaço do cursor */
+nav a:hover { color: var(--vermelho); }
+nav a:hover::before { color: var(--vermelho); }
+
+section { max-width: 1000px; margin: 0 auto; padding: 5rem 1.5rem; text-align: center; }
+
+/* Japonês decorativo acima dos títulos */
+.kanji { display: block; color: var(--ciano); font-size: 1.2rem; letter-spacing: .3em; margin-bottom: .6rem; }
+
+h2 { font-size: clamp(1.1rem, 4.5vw, 1.7rem); margin-bottom: 2rem; }
+h2::after {  /* barrinha pixelada embaixo do título */
+  content: "";
+  display: block;
+  width: 72px;
+  height: 6px;
+  margin: 1rem auto 0;
+  background: var(--vermelho);
+  box-shadow: 8px 8px 0 var(--vermelho-escuro);
+}
+
+/* Início */
+#inicio { padding-top: 3rem; }
+
+.status { color: var(--ciano); letter-spacing: .1em; margin-bottom: 1.5rem; }
+.status::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: .6rem;
+  background: var(--ciano);
+  animation: piscar 1.2s steps(1) infinite;
+}
+
+/* Palco da foto: isolate faz os raios ficarem atrás da foto, mas à frente do fundo */
+.palco { position: relative; isolation: isolate; width: 220px; margin: 0 auto 2.5rem; }
+.palco::before {  /* linhas de velocidade de anime, esmaecendo nas bordas */
+  content: "";
+  position: absolute;
+  inset: -130px;
+  z-index: -1;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 255, 255, .13) 0 3deg, transparent 3deg 9deg);
+  -webkit-mask-image: radial-gradient(circle, #000 25%, transparent 68%);
+  mask-image: radial-gradient(circle, #000 25%, transparent 68%);
+}
+
+.foto {
+  width: 220px;
+  height: 220px;
+  display: grid;
+  place-items: center;
+  background: var(--cartao);
+  border: 4px solid var(--vermelho);
+  /* Corta dois cantos em diagonal, como painéis de HUD */
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+  font-family: var(--fonte-titulo);
+  font-size: 2.4rem;
+  color: var(--vermelho);
+  animation: flutuar 5s ease-in-out infinite;
+}
+.foto img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
+
+h1 {
+  position: relative;
+  display: inline-block;
+  font-size: clamp(1.4rem, 7vw, 2.8rem);
+  line-height: 1.3;
+  text-shadow: 4px 4px 0 var(--vermelho-escuro);
+}
+/* Glitch: duas cópias do texto (vermelha e ciano) que piscam deslocadas de vez em quando */
+h1::before, h1::after {
+  content: attr(data-text);  /* copia o texto do atributo data-text do HTML */
+  position: absolute;
+  inset: 0;
+  text-shadow: none;
+  clip-path: inset(0 0 100% 0);
+  animation: glitch 4s steps(1) infinite;
+}
+h1::before { color: var(--vermelho); }
+h1::after  { color: var(--ciano); animation-delay: .15s; }
+
+.profissao { margin-top: 1.2rem; color: var(--suave); font-size: 1.6rem; }
+.frase { margin-top: .4rem; color: var(--vermelho); font-size: 1.5rem; }
+
+/* Sobre: caixa de diálogo de visual novel */
+.dialogo { position: relative; max-width: 720px; margin: 0 auto; text-align: left; }
+.etiqueta {
+  display: inline-block;
+  padding: .5rem .9rem;
+  background: var(--vermelho);
+  font-family: var(--fonte-titulo);
+  font-size: .62rem;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+}
+.caixa {
+  padding: 1.5rem 1.8rem 2rem;
+  background: var(--cartao);
+  border: 3px solid var(--borda);
+  border-top-color: var(--vermelho);
+}
+.caixa::after {  /* seta piscando no canto, como "continuar" */
+  content: "▼";
+  position: absolute;
+  right: 1.2rem;
+  bottom: .6rem;
+  color: var(--vermelho);
+  font-size: 1rem;
+  animation: piscar 1s steps(1) infinite;
+}
+
+/* Habilidades como barras de status de jogo */
+.habilidades-titulo { font-size: clamp(.9rem, 3.5vw, 1.2rem); margin: 4rem 0 2rem; }
+.habilidades {
+  list-style: none;
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1rem 2rem;
+  text-align: left;
+}
+.habilidades li { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+
+/* A barra tem 10 blocos de 14px com 4px de vão (18px por bloco).
+   A 1ª camada pinta só --n blocos de vermelho; a 2ª desenha os 10 blocos vazios. */
+.barra {
+  --n: 5;
+  flex: none;
+  width: 176px;
+  height: 14px;
+  background:
+    repeating-linear-gradient(90deg, var(--vermelho) 0 14px, transparent 14px 18px) 0 0 / calc(var(--n) * 18px) 100% no-repeat,
+    repeating-linear-gradient(90deg, var(--borda) 0 14px, transparent 14px 18px);
+}
+
+/* Projetos: cartões de missão */
+.projetos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));  /* vira 1 coluna sozinho no celular */
+  gap: 1.5rem;
+  text-align: left;
+}
+.projeto {
+  background: var(--cartao);
+  border: 3px solid var(--borda);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+.capa {  /* fundo quadriculado imita dithering de pixel art */
+  height: 150px;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--vermelho-escuro) 25%, #1a0a0c 0 50%, var(--vermelho-escuro) 0 75%, #1a0a0c 0) 0 0 / 12px 12px;
+  font-family: var(--fonte-titulo);
+  font-size: 1.6rem;
+}
+.sprite { width: 84px; image-rendering: pixelated; }
+.info { padding: 1.2rem; }
+.info h3 { font-size: .8rem; line-height: 1.5; margin-bottom: .8rem; }
+.info p { color: var(--suave); }
+.selo {
+  display: inline-block;
+  margin-bottom: .8rem;
+  padding: .15rem .6rem;
+  border: 2px solid var(--ciano);
+  color: var(--ciano);
+  font-size: 1.1rem;
+  letter-spacing: .08em;
+}
+.info a { display: inline-block; margin-top: .8rem; color: var(--vermelho); }
+
+/* Contato */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.8rem;
+  background: var(--cartao);
+  border: 3px solid var(--borda);
+  border-left-color: var(--vermelho);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+input, textarea {
+  width: 100%;
+  padding: .8rem 1rem;
+  background: #0d0d12;
+  color: var(--texto);
+  border: 3px solid var(--borda);
+  font: inherit;  /* campos de formulário não herdam a fonte sozinhos */
+}
+input:focus, textarea:focus { border-color: var(--ciano); }
+textarea { min-height: 130px; resize: vertical; }
+button {
+  padding: 1rem;
+  border: 0;
+  background: var(--vermelho);
+  color: #fff;
+  font-family: var(--fonte-titulo);
+  font-size: .7rem;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 var(--vermelho-escuro);  /* sombra "dura" estilo pixel */
+}
+button:hover { background: #ff4a5a; }
+button:active { transform: translate(4px, 4px); box-shadow: 1px 1px 0 var(--vermelho-escuro); }
+
+footer { text-align: center; padding: 2rem 1rem 3rem; color: var(--suave); }
+
+@keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes piscar { 50% { opacity: 0; } }
+@keyframes glitch {
+  0%, 90%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
+  91% { clip-path: inset(15% 0 60% 0); transform: translate(-5px, 0); }
+  94% { clip-path: inset(60% 0 12% 0); transform: translate(5px, 0); }
+  97% { clip-path: inset(38% 0 40% 0); transform: translate(-3px, 0); }
+}
+
+/* Respeita quem desativou animações no aparelho */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; }
+}
